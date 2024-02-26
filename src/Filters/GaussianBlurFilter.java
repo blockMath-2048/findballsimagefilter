@@ -35,6 +35,7 @@ public class GaussianBlurFilter implements PixelFilter {
         short [][] g0 = img.getGreenChannel();
         short [][] b0 = img.getBlueChannel();
 
+        // Scale down image to make convolutions faster
         short[][] r = new short[r0.length / SCALE][r0[0].length / SCALE];
         short[][] g = new short[g0.length / SCALE][g0[0].length / SCALE];
         short[][] b = new short[b0.length / SCALE][b0[0].length / SCALE];
@@ -44,6 +45,7 @@ public class GaussianBlurFilter implements PixelFilter {
             b[x][y] = b0[x*SCALE][y*SCALE];
         }
 
+        // Convolve
         r = Convolutions.Convolve(r, kernel);
         g = Convolutions.Convolve(g, kernel);
         b = Convolutions.Convolve(b, kernel);
